@@ -3,11 +3,10 @@
 
 #include "BeaconServer.h"
 
-using namespace std;
 
 int main()
 {
-	cout << "Hello from server." << endl;
+	std::cout << "Hello from server." << std::endl;
 	std::cin.get();
 	return 0;
 }

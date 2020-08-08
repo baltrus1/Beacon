@@ -3,11 +3,10 @@
 
 #include "BeaconClient.h"
 
-using namespace std;
 
 int main()
 {
-	cout << "Hello from client!" << endl;
+	std::cout << "Hello from client!" << std::endl;
 	std::cin.get();
 	return 0;
 }
