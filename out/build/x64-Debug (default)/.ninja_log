@@ -1,0 +1,13 @@
+# ninja log v5
+11	516	618580189	BeaconClient/CMakeFiles/BeaconClient.dir/BeaconClient.cpp.obj	3452655feff7445b
+1	522	618580189	BeaconServer/CMakeFiles/BeaconServer.dir/BeaconServer.cpp.obj	1487d04342d62f29
+523	1085	618580189	BeaconServer/BeaconServer.exe	bb5849239422d8cc
+516	1087	618580189	BeaconClient/BeaconClient.exe	5b3d5cb06e0a8008
+1	313	618580355	BeaconClient/CMakeFiles/BeaconClient.dir/BeaconClient.cpp.obj	3452655feff7445b
+313	579	618580355	BeaconClient/BeaconClient.exe	5b3d5cb06e0a8008
+0	475	618580402	BeaconServer/CMakeFiles/BeaconServer.dir/BeaconServer.cpp.obj	1487d04342d62f29
+475	764	618580402	BeaconServer/BeaconServer.exe	bb5849239422d8cc
+0	588	618581295	BeaconServer/CMakeFiles/BeaconServer.dir/BeaconServer.cpp.obj	1487d04342d62f29
+588	860	618581295	BeaconServer/BeaconServer.exe	bb5849239422d8cc
+1	475	618581317	BeaconClient/CMakeFiles/BeaconClient.dir/BeaconClient.cpp.obj	3452655feff7445b
+475	752	618581317	BeaconClient/BeaconClient.exe	5b3d5cb06e0a8008

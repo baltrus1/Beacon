@@ -1,0 +1,10 @@
+{
+  "version": "0.2.1",
+  "tasks": [
+    {
+      "taskLabel": "task-BeaconServer.cpp",
+      "appliesTo": "out/build/x64-Debug (default)/BeaconServer/CMakeFiles/BeaconServer.dir/BeaconServer.cpp.obj",
+      "type": "launch"
+    }
+  ]
+}
