@@ -1,8 +1,0 @@
-C:/Users/Baltrus/source/repos/Beacon/out/build/x64-Debug (default)/CMakeFiles/edit_cache.dir
-C:/Users/Baltrus/source/repos/Beacon/out/build/x64-Debug (default)/CMakeFiles/rebuild_cache.dir
-C:/Users/Baltrus/source/repos/Beacon/out/build/x64-Debug (default)/BeaconServer/CMakeFiles/BeaconServer.dir
-C:/Users/Baltrus/source/repos/Beacon/out/build/x64-Debug (default)/BeaconServer/CMakeFiles/edit_cache.dir
-C:/Users/Baltrus/source/repos/Beacon/out/build/x64-Debug (default)/BeaconServer/CMakeFiles/rebuild_cache.dir
-C:/Users/Baltrus/source/repos/Beacon/out/build/x64-Debug (default)/BeaconClient/CMakeFiles/BeaconClient.dir
-C:/Users/Baltrus/source/repos/Beacon/out/build/x64-Debug (default)/BeaconClient/CMakeFiles/edit_cache.dir
-C:/Users/Baltrus/source/repos/Beacon/out/build/x64-Debug (default)/BeaconClient/CMakeFiles/rebuild_cache.dir
