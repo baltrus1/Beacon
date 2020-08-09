@@ -9,4 +9,6 @@ add_executable (BeaconServer "BeaconServer.cpp" "BeaconServer.h")
 
 target_link_libraries(BeaconServer ${Boost_LIBRARIES})
 
+target_link_libraries(BeaconServer PUBLIC OpenSSL::SSL OpenSSL::Crypto)
+
 # TODO: Add tests and install targets if needed.

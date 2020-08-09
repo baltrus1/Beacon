@@ -12,8 +12,8 @@
       "ctestCommandArgs": "",
       "variables": [
         {
-          "name": "Boost_INCLUDE_DIR",
-          "value": "C:\\Program Files\\boost\\boost_1_73_0",
+          "name": "OPENSSL_ROOT_DIR",
+          "value": "C:\\vcpkg\\installed\\x86-windows",
           "type": "PATH"
         },
         {
@@ -21,6 +21,16 @@
           "value": "C:\\Program Files\\boost\\boost_1_73_0",
           "type": "PATH"
         }
+        //{
+        //  "name": "OPENSSL_INCLUDE_DIR",
+        //  "value": "C:\\Program Files\\openssl\\openssl-1.1.1g\\include",
+        //  "type": "PATH"
+        //},
+        //{
+        //  "name": "OPENSSL_CRYPTO_LIBRARY",
+        //  "value": "C:\\Program Files\\openssl\\openssl-1.1.1g\\crypto",
+        //  "type": "PATH"
+        //}
       ]
     }
   ]
