@@ -8,12 +8,15 @@ project ("Beacon")
 add_compile_definitions(BOOST_ALL_NO_LIB)
 
 set(Boost_USE_STATIC_LIBS ON)
+set(BUILD_STATIC_LIBS ON)
+
 find_package(Boost COMPONENTS system)
 
 set(OPENSSL_USE_STATIC_LIBS TRUE)
 find_package(OpenSSL REQUIRED)
 
 include_directories(${Boost_INCLUDE_DIR})
+include_directories(${JSONCPP_INCLUDE_DIRS})
 
 # Include sub-projects.
 add_subdirectory ("BeaconServer")
