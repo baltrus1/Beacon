@@ -6,11 +6,10 @@ BeaconClient is an example of such client that listens to a specific broadcast m
 Make sure you have CMake installed, if not, install it with vcpkg.
 Open project with Visual studio as CMake project. In VS2019 its File->Open->Cmake and navigate to project root, open CMakeLists.txt.
 
-Download boost (https://www.boost.org/users/download/) and unzip it to 
-i.e. C:\Program Files\boost (if you move somewhere else change the path variable BOOST_ROOT in CMakeSetting.json accordingly.
-
 Install boost, jsoncpp and openssl:
   vcpkg.exe install boost jsoncpp openssl
+  
+Set all variables specified in CMakeSettings to "<vcpkg_root>\\vcpkg\\installed\\x86-windows"(unless installed any of above not with vcpkg, then set the paths accordingly)
 
 Build with Right click on CMakeLists.txt -> build.
 If some dlls are missing, copy them from <vcpkg_root>\installed\x86-windows\bin\x.dll to Beacon\out\build\x86-Debug\BeaconServer\x.dll
