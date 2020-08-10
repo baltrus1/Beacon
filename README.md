@@ -7,7 +7,7 @@ Make sure you have CMake installed, if not, install it with vcpkg.
 Open project with Visual studio as CMake project. In VS2019 its File->Open->Cmake and navigate to project root, open CMakeLists.txt.
 
 Install boost, jsoncpp and openssl:
-  vcpkg.exe install boost jsoncpp openssl
+"vcpkg.exe install boost jsoncpp openssl"
   
 Set all variables specified in CMakeSettings to "<vcpkg_root>\\vcpkg\\installed\\x86-windows"(unless installed any of above not with vcpkg, then set the paths accordingly)
 
