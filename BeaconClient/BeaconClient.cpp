@@ -60,6 +60,8 @@ void displayData(const std::string data) {
     }
 
     std::vector<std::pair<int, const char*>> servers;
+    servers.reserve(root.size());
+
     const char* buffer;
 
     assert(root.isArray());
