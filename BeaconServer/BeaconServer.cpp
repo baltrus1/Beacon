@@ -19,13 +19,26 @@ namespace ba = boost::asio;
 
 static boost::asio::io_context io_context;
 
+// Thread safe logging. Once client and server is one binary extract this to reuse in both
+struct Logger {
+	void log(const std::string& tag, const std::string& message) {
+		std::lock_guard<std::mutex> guard(m_stdoutMutex);
+		std::cout << tag << ": " << message;
+		std::cout.flush();
+	}
+private:
+	std::mutex m_stdoutMutex;
+};
+
+static Logger s_logger;
+
 class PeriodicBroadcasting {
-	int m_interval = 1;
+	int m_interval;
 	std::atomic<bool> m_running = false;
 	std::unique_ptr<std::thread> m_thread;
 	boost::system::error_code m_error;
 public:
-	PeriodicBroadcasting(int interval)
+	PeriodicBroadcasting(int interval = 1)
 		: m_interval(interval)
 	{
 	}
@@ -51,7 +64,7 @@ public:
 			try {
 				socket->send_to(buffer, remote_endpoint, 0, m_error);
 				if (m_error) {
-					std::cerr << "Broadcast send failed: " << m_error.message() << std::endl;
+					s_logger.log("SERVER", "Broadcast send failed: " + m_error.message() + "\n");
 				}
 				std::this_thread::sleep_for(std::chrono::seconds(m_interval));
 			}
@@ -85,7 +98,7 @@ public:
 				if (!error) {
 					handshake();
 				} else {
-					std::cout << "Connect failed: " << error.message() << "\n";
+					s_logger.log("SERVER", "Connect failed: " + error.message() + "\n");
 				}
 			});
 	}
@@ -97,7 +110,7 @@ private:
 				if (!error) {
 					send_request();
 				} else {
-					std::cout << "Handshake failed: " << error.message() << "\n";
+					s_logger.log("SERVER", "Handshake failed: " + error.message() + "\n");
 				}
 			});
 	}
@@ -129,7 +142,7 @@ private:
 				if (!error) {
 					receive_response();
 				} else {
-					std::cout << "Write failed: " << error.message() << "\n";
+					s_logger.log("SERVER", "Write failed: " + error.message() + "\n");
 				}
 			});
 	}
@@ -149,20 +162,23 @@ private:
 		size_t startPos = response.find("[{\"");
 		size_t endPos = response.find("}]");
 		std::string body = response.substr(startPos, endPos - startPos + 2);
-		std::cout << "SERVER: Sending data to client:\n" << body << std::endl << std::endl;
+
+		std::ostringstream oss;
+		oss << "Sending data to client:\n" << body << "\n\n";
+		s_logger.log("SERVER", oss.str());
 
 		boost::system::error_code ec;
 		ba::ip::udp::socket sock(io_context);
 
 		sock.open(ba::ip::udp::v4(), ec);
 		if (ec) {
-			std::cerr << "SERVER: Socket open failed: " << ec.message() << std::endl;
+			s_logger.log("SERVER", "Socket open failed: " + ec.message() + "\n");
 			return;
 		}
 
 		sock.send_to(boost::asio::buffer(body, body.length()), m_clientEndpoint, 0, ec);
 		if (ec) {
-			std::cout << "SERVER: Failed to send server list to client: " << ec.message() << std::endl;
+			s_logger.log("SERVER", "Failed to send server list to client: " + ec.message() + "\n");
 			return;
 		}
 	}
@@ -171,7 +187,6 @@ private:
 	ba::ip::tcp::resolver::results_type endpoints_;
 	ba::ssl::stream<ba::ip::tcp::socket> socket_;
 	ba::ip::udp::endpoint m_clientEndpoint;
-	char request_[MAX_LENGTH];
 	char reply_[MAX_LENGTH];
 };
 
@@ -201,7 +216,7 @@ private:
 		std::size_t /*bytes_transferred*/)
 	{
 		if (ec) {
-			std::cout << "SERVER: " << ec.message() << std::endl;
+			s_logger.log("SERVER", ec.message() + "\n");
 			return;
 		}
 
@@ -209,12 +224,6 @@ private:
 		proxies.push(std::make_shared<Proxy>(source_endpoint));
 
 		start_receive();
-	}
-
-	void handle_send(boost::shared_ptr<std::string> /*message*/,
-		const boost::system::error_code& /*error*/,
-		std::size_t /*bytes_transferred*/)
-	{
 	}
 
 	// Implement proxy deletion once it finishes serving the client(change structure)
@@ -231,7 +240,7 @@ int main(int argc, char* argv[]) {
 	auto socket = std::make_shared< ba::ip::udp::socket>(io_context);
 	socket->open(ba::ip::udp::v4(), ec);
 	if (ec) {
-		std::cerr << "Socket open failed: " << ec.message() << std::endl;
+		std::cerr << "SERVER: Socket open failed: " << ec.message() << std::endl;
 	}
 
 	ba::socket_base::broadcast option(true);
@@ -247,7 +256,7 @@ int main(int argc, char* argv[]) {
 
 	pb.start(socket, buffer, remote_endpoint);
 	udp_server server;
-	std::cout << "Server is running." << std::endl;
+	std::cout << "SERVER: running.." << std::endl;
 
 	io_context.run();
 	std::this_thread::sleep_for(std::chrono::seconds(200));

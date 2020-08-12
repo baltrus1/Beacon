@@ -2,7 +2,7 @@
   "configurations": [
     {
       "name": "x86-Debug",
-      "generator": "Visual Studio 16 2019",
+      "generator": "Ninja",
       "configurationType": "Debug",
       "inheritEnvironments": [ "msvc_x86" ],
       "buildRoot": "${projectDir}\\out\\build\\${name}",
@@ -10,6 +10,34 @@
       "cmakeCommandArgs": "",
       "buildCommandArgs": "",
       "ctestCommandArgs": "",
+      "variables": [
+        {
+          "name": "OPENSSL_ROOT_DIR",
+          "value": "C:\\vcpkg\\installed\\x86-windows",
+          "type": "PATH"
+        },
+        {
+          "name": "BOOST_ROOT",
+          "value": "C:\\Program Files\\boost\\boost_1_73_0",
+          "type": "PATH"
+        },
+        {
+          "name": "jsoncpp_DIR",
+          "value": "C:\\vcpkg\\installed\\x86-windows",
+          "type": "PATH"
+        }
+      ]
+    },
+    {
+      "name": "x86-Release",
+      "generator": "Ninja",
+      "configurationType": "RelWithDebInfo",
+      "buildRoot": "${projectDir}\\out\\build\\${name}",
+      "installRoot": "${projectDir}\\out\\install\\${name}",
+      "cmakeCommandArgs": "",
+      "buildCommandArgs": "",
+      "ctestCommandArgs": "",
+      "inheritEnvironments": [ "msvc_x86" ],
       "variables": [
         {
           "name": "OPENSSL_ROOT_DIR",
